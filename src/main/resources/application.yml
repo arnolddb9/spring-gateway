@@ -7,6 +7,8 @@ uri:
     cuentas: https://pokeapi.co
 
 spring:
+  application:
+    name: spring-gateway
   cloud:
     gateway:
       routes:
@@ -38,3 +40,12 @@ spring:
           args:
             name: clientsService
             fallbackUri: forward:/service-fallback
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
